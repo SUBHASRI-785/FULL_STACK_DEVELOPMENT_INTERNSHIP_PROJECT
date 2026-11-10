@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Gallery • Photo Gallery</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="upload-container">
+    <h2 id="welcomeText">Welcome</h2>
+
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="uploadImage()">Upload</button>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+
+    <p id="status"></p>
+
+    <h3>Your Images</h3>
+    <div id="gallery" class="gallery-grid"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabaseUrl = "YOUR_SUPABASE_URL";
+    const supabaseKey = "YOUR_SUPABASE_ANON_KEY";
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Show Welcome Text
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) {
+        document.getElementById("welcomeText").textContent =
+          "Welcome Back, " + data.user.email.split("@")[0] + "!";
+      }
+    });
+
+    // Check session
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) window.location = "index.html";
+      else loadImages();
+    });
+
+    async function logout() {
+      await supabase.auth.signOut();
+      window.location = "index.html";
+    }
+
+    async function uploadImage() {
+      const fileInput = document.getElementById("imageInput");
+      if (!fileInput.files.length) return;
+
+      const file = fileInput.files[0];
+      const fileName = `${Date.now()}_${file.name}`;
+
+      const { error } = await supabase.storage.from("images").upload(fileName, file);
+
+      document.getElementById("status").textContent =
+        error ? error.message : "Uploaded Successfully!";
+
+      loadImages();
+    }
+
+    async function loadImages() {
+      const { data, error } = await supabase.storage.from("images").list("", { limit: 100 });
+
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
+
+      if (error) {
+        document.getElementById("status").textContent = error.message;
+        return;
+      }
+
+      data.forEach(item => {
+        const { data: urlData } = supabase.storage.from("images").getPublicUrl(item.name);
+        const img = document.createElement("img");
+        img.src = urlData.publicUrl;
+        gallery.appendChild(img);
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #6b8dd6, #9bb8f3);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #333;
+}
+
+
+.login-container,
+.upload-container {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 30px 25px;
+  background: #ffffffdd;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e0e0e0;
+}
+
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 14px;
+  color: #273c75;
+  font-weight: 600;
+}
+
+
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #4a69bd;
+  box-shadow: 0 0 6px rgba(74, 105, 189, 0.4);
+}
+
+button {
+  padding: 10px 20px;
+  margin: 8px 6px;
+  border: none;
+  background: #4a69bd;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+button:hover {
+  background: #36529e;
+}
+
+.logout-btn {
+  background: #bf2e2e;
+}
+
+button.logout-btn:hover {
+  background: #982828;
+}
+
+/* STATUS TEXT */
+#status, #message {
+  font-size: 14px;
+  margin: 8px 0;
+  color: #b30000;
+}
+
+
+.gallery-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  padding: 14px;
+  margin-top: 18px;
+}
+
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border: 2px solid #f1f1f1;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+.gallery-grid img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+
+h3 {
+  color: #2d4373;
+  margin-top: 20px;
+  font-size: 20px;
+}
