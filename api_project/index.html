@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather & Life Advice App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1>Weather & Life Advice</h1>
+
+        <div class="weather-section">
+            <input id="cityInput" type="text" placeholder="Enter city (e.g., Chennai)">
+            <button onclick="getWeather()">Get Weather</button>
+
+            <div id="weatherResult" class="result-box"></div>
+        </div>
+
+        <hr>
+
+        <div class="advice-section">
+            <button onclick="getAdvice()">Give Me Advice</button>
+            <div id="adviceResult" class="result-box"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
